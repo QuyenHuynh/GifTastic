@@ -51,20 +51,6 @@ function displayGifs() {
             //get the gif ratings
             var rating = $("<p>").text("Rating: " + response.data[i].rating);
             divElem.append(rating);
-
-            //on-click function that allows user to pause and unpause gifs
-            $(".gif").on("click", function () {
-
-                var state = $(this).attr("data-state");
-
-                if (state === "still") {
-                    $(this).attr("src", $(this).attr("data-animate"));
-                    $(this).attr("data-state", "animate");
-                } else {
-                    $(this).attr("src", $(this).attr("data-still"));
-                    $(this).attr("data-state", "still");
-                }
-            });
         }
     });
 }
@@ -88,6 +74,18 @@ function renderButtons() {
         $("#my-buttons").append(buttonElem);
     }
 }
+
+//on-click function that allows user to pause and unpause gifs
+$(document).on('click', '.gif', function () {
+    var state = $(this).attr('data-state');
+    if (state == 'still') {
+        $(this).attr('src', $(this).data('animate'));
+        $(this).attr('data-state', 'animate');
+    } else {
+        $(this).attr('src', $(this).data('still'));
+        $(this).attr('data-state', 'still');
+    };
+});
 
 // This function appends more buttons if the user desires
 $("#add-button").on("click", function (event) {
